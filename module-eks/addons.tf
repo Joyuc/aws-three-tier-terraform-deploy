@@ -7,11 +7,11 @@ provider "kubernetes" {
 
 provider "helm" {
     alias = "eks"
-#   kubernetes {
-#     host                   = aws_eks_cluster.eks.endpoint
-#     cluster_ca_certificate = base64decode(aws_eks_cluster.eks.certificate_authority[0].data)
-#     token                  = data.aws_eks_cluster_auth.eks.token
-#     }
+  kubernetes {
+    host                   = aws_eks_cluster.eks.endpoint
+    cluster_ca_certificate = base64decode(aws_eks_cluster.eks.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.eks.token
+    }
 }
 
 data "aws_eks_cluster_auth" "eks" {
@@ -45,10 +45,18 @@ resource "helm_release" "cert_manager" {
     version    = "1.14.5"
     namespace  = "cert-manager"
     create_namespace = true
-    set {
-        name  = "installCRDs"
-        value = "true"
-    }
+#   set {
+#         name  = "installCRDs"
+#         value = "true"
+#     }
+    set = [
+        {
+          name  = "installCRDs"
+          value = "true"
+          }
+          
+    ]
+  
     provider         = helm.eks
     depends_on = [ helm_release.nginx_ingress ]
 }
