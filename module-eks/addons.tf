@@ -25,7 +25,7 @@ resource "helm_release" "nginx_ingress" {
     create_namespace = true
 
     values = [file("${path.module}/nginx-ingress-values.yaml")]
-    provider         = kubernetes.eks
+    provider         = helm.eks
     depends_on = [ aws_eks_node_group.eks_node_group ]
 }
 
@@ -48,7 +48,7 @@ resource "helm_release" "cert_manager" {
         name  = "installCRDs"
         value = "true"
     }
-    provider         = kubernetes.eks
+    provider         = helm.eks
     depends_on = [ helm_release.nginx_ingress ]
 }
 #==================================================
@@ -61,6 +61,6 @@ resource "helm_release" "argocd" {
     namespace        = "argocd"
     create_namespace = true
     values = [file("${path.module}/argocd-values.yaml")]
-    provider         = kubernetes.eks
+    provider         = helm.eks
     depends_on = [ helm_release.nginx_ingress, helm_release.cert_manager]
 }
