@@ -2,6 +2,6 @@ resource "namecheap_domain_records" "my-domain2-com" {
   domain = var.domain_name
   mode = "OVERWRITE" // Warning: this will remove all manually set records
 
-  nameservers = data.aws_route53_zone.r53_zone.name_servers
+  nameservers = aws_route53_zone.r53_zone.name_servers
   depends_on = [ aws_route53_zone.r53_zone ]
 }
