@@ -6,11 +6,12 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  kubernetes {
-    host                   = aws_eks_cluster.eks.endpoint
-    cluster_ca_certificate = base64decode(aws_eks_cluster.eks.certificate_authority[0].data)
-    token                  = data.aws_eks_cluster_auth.eks.token
-    }
+    alias = "eks"
+#   kubernetes {
+#     host                   = aws_eks_cluster.eks.endpoint
+#     cluster_ca_certificate = base64decode(aws_eks_cluster.eks.certificate_authority[0].data)
+#     token                  = data.aws_eks_cluster_auth.eks.token
+#     }
 }
 
 data "aws_eks_cluster_auth" "eks" {
@@ -25,7 +26,7 @@ resource "helm_release" "nginx_ingress" {
     create_namespace = true
 
     values = [file("${path.module}/nginx-ingress-values.yaml")]
-    # provider         = helm.eks
+    provider         = helm.eks
     depends_on = [ aws_eks_node_group.eks_node_group ]
 }
 
@@ -48,7 +49,7 @@ resource "helm_release" "cert_manager" {
         name  = "installCRDs"
         value = "true"
     }
-    # provider         = helm.eks
+    provider         = helm.eks
     depends_on = [ helm_release.nginx_ingress ]
 }
 #==================================================
@@ -61,6 +62,6 @@ resource "helm_release" "argocd" {
     namespace        = "argocd"
     create_namespace = true
     values = [file("${path.module}/argocd-values.yaml")]
-    # provider         = helm.eks
+    provider         = helm.eks
     depends_on = [ helm_release.nginx_ingress, helm_release.cert_manager]
 }
