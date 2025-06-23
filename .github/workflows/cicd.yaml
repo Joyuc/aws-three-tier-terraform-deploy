@@ -73,7 +73,7 @@ jobs:
       - name: 'authenticate to EKS Cluster'
         run: aws eks update-kubeconfig --name ${{ vars.EKS_CLUSTER_NAME }} --region us-east-1
       
-      - name: 'Yeah,deploying the ClusterIssuer to EKS'
+      - name: 'Deploying the ClusterIssuer to EKS'
         run: kubectl apply -f ClusterIssuer.yaml
 
       - name: 'Deploying argocd ingress rule to EKS'
