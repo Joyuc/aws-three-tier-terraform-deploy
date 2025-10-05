@@ -10,8 +10,7 @@ module "vpc-deployment" {
   
 }
 
-#creating an EKS cluster using Terraform
-# and deploying it in the VPC created above
+#creating an EKS cluster using Terraform and deploying it in the VPC created above
 module "eks-deployment" {
     source = "./module-eks"
     
