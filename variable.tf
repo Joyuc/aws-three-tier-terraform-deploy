@@ -8,7 +8,7 @@ variable "vpc_cidrblock" {
 variable "environment" {
   description = "Environment name (e.g., dev, staging, prod)"
   type        = string
-  default     = "staging"
+  default     = "production"
   
 }
 
@@ -74,25 +74,25 @@ variable "ami_type" {
 variable "label_one" {
   description = "Label for the EKS node group"
   type        = string
-  default     = "system"
+  default     = "system-nodepool"
 }
 
 variable "zone_name" {
   description = "Name of the DNS zone"
   type        = string
-  default     = "example.com"
+  default     = "jay4tech.online"
 }
 
 variable "domain_name" {
   description = "Domain name to be created"
   type        = string
-  default     = "myapp.example.com"
+  # default     = "myapp.example.com"
 }
 
 # variable "namecheap_api_user" {
 #   description = "Namecheap API user"
 #   type        = string
-#   default     = "smartobi"
+#   default     = "joyukibe"
 # }
 # variable "namecheap_api_key" {
 #   description = "Namecheap API key"
@@ -102,13 +102,13 @@ variable "domain_name" {
 # variable "namecheap_username" {
 #   description = "Namecheap username"
 #   type        = string
-#   default     = "smartobi"
+#   default     = "joyukibe"
 # }
-# variable "namecheap_client_ip" {
-#   description = "Client IP for Namecheap API access"
-#   type        = string
-#   default     = "3.101.24.8" # Replace with your actual client IP
-# }
+variable "namecheap_client_ip" {
+  description = "Client IP for Namecheap API access"
+  type        = string
+  default     = "3.101.24.8" # Replace with your actual client IP
+}
 
 #===========
 
@@ -139,7 +139,7 @@ variable "db_username" {
 variable "db_password" {
   description = "Password for the database"
   type        = string
-  default     = "password123"
+  default     = "bank124#"
   sensitive   = true
 }
 

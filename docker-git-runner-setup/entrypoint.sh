@@ -6,7 +6,7 @@ echo "Fixing permissions for /home/runner/_work..."
 mkdir -p /home/runner/_work
 chown -R runner:runner /home/runner/_work
 
-# Use REPO like "username/repo"
+# Use REPO (github repo) like "username/repo"
 TOKEN_URL="https://api.github.com/repos/${REPO}/actions/runners/registration-token"
 
 echo "Requesting registration token for $REPO..."

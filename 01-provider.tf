@@ -1,15 +1,6 @@
-# provider "aws" {
-#   region = "us-east-1"
-# }
-
-
 terraform {
   required_providers {
-   
-     godaddy-dns = {
-      source = "veksh/godaddy-dns"
-      version = "0.3.12"
-    }
+
     aws = {
       source = "hashicorp/aws"
       version = "6.0.0-beta2"
@@ -20,9 +11,15 @@ terraform {
     }
 
 #To use namecheap
-     # namecheap = {
+    # namecheap = {
     #   source = "namecheap/namecheap"
     #   version = "2.2.0"
+    # }
+
+  #To use godaddy
+    #  godaddy-dns = {
+    #   source = "veksh/godaddy-dns"
+    #   version = "0.3.12"
     # }
   }
 }
@@ -32,10 +29,10 @@ provider "aws" {
   region = "us-east-1"
 }
 
-provider "godaddy-dns" {
-  api_key    = "better set it in GODADDY_API_KEY"
-  api_secret = "better set it in GODADDY_API_SECRET"
-}
+# provider "godaddy-dns" {
+#   api_key    = "better set it in GODADDY_API_KEY"
+#   api_secret = "better set it in GODADDY_API_SECRET"
+# }
 
 # provider "namecheap" {
 #   user_name = var.namecheap_username
